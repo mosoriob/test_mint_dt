@@ -2,7 +2,10 @@
 
 cwlVersion: v1.1 
 class: CommandLineTool
-baseCommand: ["cat", "config.yaml"]
+baseCommand: config.yaml
+hints:
+  DockerRequirement:
+    dockerImageId: mintproject/mint_dt
 requirements:
   InitialWorkDirRequirement:
     listing:
@@ -12,28 +15,28 @@ requirements:
             description: Data transformation to generate TopoFlow-ready precipitation files (RTS) from Global Precipitation Measurement (GPM) data sources
             inputs:
             input_dir:
-                comment: "Path to input directory"
-                value: $(inputs.input_dir.path)
+              comment: "Path to input directory"
+              value: $(inputs.input_dir.path)
             temp_dir:
-                comment: "Path to temporary diretory (to store temp files generated)"
-                value: "/tmp/"
+              comment: "Path to temporary diretory (to store temp files generated)"
+              value: "/tmp/"
             output_file:
-                comment: "Path to output directory"
-                value: "/tmp/output.zip"
+              comment: "Path to output directory"
+              value: "/tmp/output.zip"
             var_name:
-                comment: "Variable to extract values"
-                value: $(inputs.var_name)
+              comment: "Variable to extract values"
+              value: $(inputs.var_name)
             bounding_box:
-                comment: "Bounding box of the extracting region"
-                value: $(inputs.bounding_box)
+              comment: "Bounding box of the extracting region"
+              value: $(inputs.bounding_box)
             xres_arcsecs:
-                comment: "Resolution on x axis"
-                value: "30"
+              comment: "Resolution on x axis"
+              value: "30"
             yres_arcsecs:
-                comment: "Resolution on y axis"
-                value: "30"
+              comment: "Resolution on y axis"
+              value: "30"
             adapters:
-            tf_climate:
+              tf_climate:
                 comment: My topoflow climate write adapter
                 adapter: funcs.Topoflow4ClimateWriteFunc
                 inputs:
